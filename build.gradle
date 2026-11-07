@@ -67,3 +67,12 @@ tasks.register('shadowJar', Jar) {
 	archiveClassifier.set('shadow')
 	archiveFileName.set("${rootProject.name}-${project.version}-all.jar")
 }
+jar {
+	archiveFileName = 'VyreWatch.jar'
+	manifest {
+		attributes(
+				'Plugin-Version': '1.0.0',
+				'Plugin-Provider': 'Developer'
+		)
+	}
+}
