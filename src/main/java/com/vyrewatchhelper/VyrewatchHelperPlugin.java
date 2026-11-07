@@ -1,4 +1,4 @@
-package com.example;
+package com.vyrewatchhelper;
 
 import javax.inject.Inject;
 import com.google.inject.Provides;
@@ -24,7 +24,7 @@ import java.time.Instant;
 		description = "Helpers for camping Vyrewatch Sentinels for Blood Shards",
 		tags = {"combat", "vyre", "afk", "blood shard"}
 )
-public class ExamplePlugin extends Plugin
+public class VyrewatchHelperPlugin extends Plugin
 {
 	@Inject
 	private Client client;
@@ -33,7 +33,7 @@ public class ExamplePlugin extends Plugin
 	private ClientThread clientThread;
 
 	@Inject
-	private ExampleConfig config;
+	private VyrewatchHelperconfig config;
 
 	@Inject
 	private Notifier notifier;
@@ -42,7 +42,7 @@ public class ExamplePlugin extends Plugin
 	private OverlayManager overlayManager;
 
 	@Inject
-	private ExampleStatsOverlay statsOverlay;
+	private VyrewatchHelperStatsOverlay statsOverlay;
 
 	@Getter private int killCount = 0;
 	@Getter private int shardCount = 0;
@@ -50,9 +50,9 @@ public class ExamplePlugin extends Plugin
 	@Getter private boolean trackingStarted = false;
 
 	@Provides
-	ExampleConfig provideConfig(ConfigManager configManager)
+	VyrewatchHelperconfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(ExampleConfig.class);
+		return configManager.getConfig(VyrewatchHelperconfig.class);
 	}
 
 	@Override

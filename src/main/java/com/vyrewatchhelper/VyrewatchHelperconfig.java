@@ -1,11 +1,11 @@
-package com.example;
+package com.vyrewatchhelper;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
 @ConfigGroup("vyrewatchhelper")
-public interface ExampleConfig extends Config
+public interface VyrewatchHelperconfig extends Config
 {
 	@ConfigItem(
 			keyName = "lowPrayerAlert",

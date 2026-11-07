@@ -1,4 +1,4 @@
-package com.example;
+package com.vyrewatchhelper;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,12 +11,12 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
 
-public class ExampleStatsOverlay extends OverlayPanel
+public class VyrewatchHelperStatsOverlay extends OverlayPanel
 {
-    private final ExamplePlugin plugin;
+    private final VyrewatchHelperPlugin plugin;
 
     @Inject
-    private ExampleStatsOverlay(ExamplePlugin plugin)
+    private VyrewatchHelperStatsOverlay(VyrewatchHelperPlugin plugin)
     {
         this.plugin = plugin;
         setPosition(OverlayPosition.TOP_LEFT);
