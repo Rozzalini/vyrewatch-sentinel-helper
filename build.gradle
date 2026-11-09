@@ -71,7 +71,7 @@ jar {
 	archiveFileName = 'VyreWatch.jar'
 	manifest {
 		attributes(
-				'Plugin-Version': '1.0.0',
+				'Plugin-Version': '1.0.1',
 				'Plugin-Provider': 'Developer'
 		)
 	}

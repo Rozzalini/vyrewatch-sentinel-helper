@@ -15,6 +15,11 @@ public class VyrewatchHelperStatsOverlay extends OverlayPanel
 {
     private final VyrewatchHelperPlugin plugin;
 
+    // Optimization: Cache static color objects to prevent recreating them mid-render
+    private static final Color TITLE_COLOR = Color.GREEN;
+    private static final Color SHARD_DROP_COLOR = Color.RED;
+    private static final Color DEFAULT_TEXT_COLOR = Color.WHITE;
+
     @Inject
     private VyrewatchHelperStatsOverlay(VyrewatchHelperPlugin plugin)
     {
@@ -25,27 +30,35 @@ public class VyrewatchHelperStatsOverlay extends OverlayPanel
     @Override
     public Dimension render(Graphics2D graphics)
     {
-        if (!plugin.isTrackingStarted())
+        if (!plugin.isTrackingStarted() || plugin.getStartTime() == null)
         {
             return null;
         }
 
+        // CRITICAL FIX: Clear last frame's components to prevent an infinite memory leak accumulation
+        panelComponent.getChildren().clear();
+
+        // 1. Add Title
         panelComponent.getChildren().add(TitleComponent.builder()
                 .text("Vyre Tracker")
-                .color(Color.GREEN)
+                .color(TITLE_COLOR)
                 .build());
 
+        // 2. Add Kill Count
         panelComponent.getChildren().add(LineComponent.builder()
                 .left("Kills:")
                 .right(String.valueOf(plugin.getKillCount()))
                 .build());
 
+        // 3. Add Shards Collected
+        int shardCount = plugin.getShardCount();
         panelComponent.getChildren().add(LineComponent.builder()
                 .left("Shards:")
-                .right(String.valueOf(plugin.getShardCount()))
-                .rightColor(plugin.getShardCount() > 0 ? Color.RED : Color.WHITE)
+                .right(String.valueOf(shardCount))
+                .rightColor(shardCount > 0 ? SHARD_DROP_COLOR : DEFAULT_TEXT_COLOR)
                 .build());
 
+        // 4. Calculate and Format Time
         Duration elapsed = Duration.between(plugin.getStartTime(), Instant.now());
         long s = elapsed.getSeconds();
         String formattedTime = String.format("%02d:%02d:%02d", s / 3600, (s % 3600) / 60, s % 60);
